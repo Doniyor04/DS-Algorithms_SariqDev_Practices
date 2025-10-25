@@ -1,23 +1,32 @@
-array = [2, -1, 5, 4]
-
-# n = len(array) // 2
-# arr1 = array[:n]
-# arr2 = array[n:]
-
-
 def merge_sort(arr: list):
     if not arr:
         return
-    n = len(arr) // 2
-    if len(arr) != 1:
-        arr1 = arr[:n]
-        arr2 = arr[n:]
-        l1 = merge_sort(arr1)
-        l2 = merge_sort(arr2)
-    else:
-        return arr
     
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        L = arr[:mid]
+        R = arr[mid:]
 
+        merge_sort(L)
+        merge_sort(R)
 
+        i = j = k = 0
 
-merge_sort(array)
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                arr[k] = L[i]
+                i += 1
+            else:
+                arr[k] = R[j]
+                j += 1
+            k += 1
+
+        while i < len(L):
+            arr[k] = L[i]
+            i += 1
+            k += 1
+
+        while j < len(R):
+            arr[k] = R[j]
+            j += 1
+            k += 1
